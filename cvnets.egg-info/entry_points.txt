@@ -1,0 +1,8 @@
+[console_scripts]
+cvnets-convert = main_conversion:main_worker_conversion
+cvnets-eval = main_eval:main_worker
+cvnets-eval-det = main_eval:main_worker_detection
+cvnets-eval-seg = main_eval:main_worker_segmentation
+cvnets-latency = main_latency:main_worker
+cvnets-train = main_train:main_worker
+cvnets-train-dist = main_train_dist:main_worker

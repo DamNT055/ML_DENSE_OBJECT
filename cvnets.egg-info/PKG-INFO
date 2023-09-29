@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: cvnets
+Version: 0.1
+Summary: CVNets: A library for training computer vision networks
+Home-page: https://github.com/apple/ml-cvnets.git
+License-File: LICENSE
