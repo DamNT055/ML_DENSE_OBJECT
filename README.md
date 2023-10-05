@@ -11,3 +11,7 @@ Dependencies include: ```pytorch```, ```torchvision```, ```tqdm```, and was test
 Move to the main_work directory and run the mobilevitv3_fpn.ipynb
 
 The main work file from the the path: /main_work/mobilevitv3_fpn.ipynb
+
+## Output 
+
+![alt text](https://raw.githubusercontent.com/DamNT055/ML_DENSE_OBJECT/main/pictures/output.png "Logo Title Text 1")
