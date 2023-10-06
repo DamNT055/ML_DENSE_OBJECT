@@ -60,6 +60,7 @@ def build_classification_model(opts, *args, **kwargs):
             model = CLS_MODEL_REGISTRY[model_name](opts,*args, **kwargs)
     else:
         supported_models = list(CLS_MODEL_REGISTRY.keys())
+        print('check', supported_models)
         supp_model_str = "Supported models are:"
         for i, m_name in enumerate(supported_models):
             supp_model_str += "\n\t {}: {}".format(i, logger.color_text(m_name))
@@ -68,6 +69,7 @@ def build_classification_model(opts, *args, **kwargs):
             logger.error(supp_model_str)
 
     pretrained = getattr(opts, "model.classification.pretrained", None)
+        
     if pretrained is not None:
         pretrained = get_local_path(opts, path=pretrained)
         model = load_pretrained_model(model=model, wt_loc=pretrained, is_master_node=is_master_node)
@@ -125,4 +127,5 @@ for file in os.listdir(models_dir):
             and (file.endswith(".py") or os.path.isdir(path))
     ):
         model_name = file[: file.find(".py")] if file.endswith(".py") else file
-        module = importlib.import_module("cvnets.models.classification." + model_name)
+        #module = importlib.import_module("src.mlcvnets.models.classification." + model_name)
+        module = importlib.import_module(f"src.mlcvnets.cvnets.models.classification.{model_name}")

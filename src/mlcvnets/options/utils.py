@@ -2,9 +2,12 @@
 # For licensing see accompanying LICENSE file.
 # Copyright (C) 2020 Apple Inc. All Rights Reserved.
 #
+import os
+import sys 
+from pathlib import Path 
+os.chdir(Path(__file__).parents[1])
 
 import yaml
-import os
 import collections
 
 from utils import logger

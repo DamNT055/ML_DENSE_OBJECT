@@ -10,7 +10,7 @@ from pathlib import Path,PurePath
 
 
 def load_pretrained_model(model, wt_loc, is_master_node: bool = False):
-    root_path = Path(__file__).parent.parent.parent
+    root_path = Path(__file__).parents[2]
     wt_loc = PurePath(root_path).joinpath(wt_loc)
  
     wt_loc = os.path.join(os.path.dirname(os.getcwd()),wt_loc).replace("\\","/")

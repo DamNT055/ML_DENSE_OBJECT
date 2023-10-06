@@ -5,10 +5,9 @@ from contextlib import redirect_stdout
 import numpy as np
 import pycocotools.mask as mask_util
 import torch
-import utils_vision
+from .utils_vision import all_gather
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
-
 
 class CocoEvaluator:
     def __init__(self, coco_gt, iou_types):
@@ -155,8 +154,8 @@ def convert_to_xywh(boxes):
 
 
 def merge(img_ids, eval_imgs):
-    all_img_ids = utils_vision.all_gather(img_ids)
-    all_eval_imgs = utils_vision.all_gather(eval_imgs)
+    all_img_ids = all_gather(img_ids)
+    all_eval_imgs = all_gather(eval_imgs)
 
     merged_img_ids = []
     for p in all_img_ids:

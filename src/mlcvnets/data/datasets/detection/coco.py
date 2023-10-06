@@ -11,8 +11,8 @@ import numpy as np
 import math
 
 from utils import logger
-from cvnets.misc.anchor_generator import SSDAnchorGenerator
-from cvnets.misc.match_prior import SSDMatcher
+from ....cvnets.misc.anchor_generator import SSDAnchorGenerator
+from ....cvnets.misc.match_prior import SSDMatcher
 
 from ...transforms import image as tf
 from ...datasets import BaseImageDataset, register_dataset

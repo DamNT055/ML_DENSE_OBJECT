@@ -168,4 +168,5 @@ for task in SUPPORTED_TASKS:
                 and (file.endswith(".py") or os.path.isdir(path))
         ):
             dataset_name = file[: file.find(".py")] if file.endswith(".py") else file
-            module = importlib.import_module("data.datasets." + task + "." + dataset_name)
+        
+            module = importlib.import_module("src.mlcvnets.data.datasets." + task + "." + dataset_name)
