@@ -1,0 +1,6 @@
+cvnets-train --common.config-file config/detection/ssd_mobilevit_small_320.yaml --common.results-loc results_coco_mobilevit_s
+
+
+config/detection/ssd_mobilevitv3_xx_small_320.yaml
+
+python main_train.py --common.config-file config/detection/ssd_mobilevitv3_xx_small_320.yaml --common.results-loc results_coco_mobilevit_s
