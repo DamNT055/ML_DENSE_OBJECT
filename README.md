@@ -25,9 +25,8 @@ example path:
 * data/SKU110K/images
 * data/SKU110K/classes/class_mappings.csv
 
-Move to the main_work directory and run the mobilevitv3_fpn.ipynb
-
-The main work file from the the path: /main_work/mobilevitv3_fpn.ipynb
+1. Move to the directory: ```cd ML_DENSE_OBJECT```
+2. Train ``` python -m src.training ```
 
 ## Output 
 ### Expected 
