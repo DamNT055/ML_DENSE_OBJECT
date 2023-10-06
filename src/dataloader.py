@@ -93,15 +93,15 @@ class CSVGenerator(torch.utils.data.Dataset):
 
 def dataloader_generator():
     dataset = CSVGenerator(
-        csv_data_file= os.path.abspath("../../SKU110K/annotations/annotations_train.csv"),
-        csv_class_file= os.path.abspath("../../SKU110K/classes/class_mappings.csv"),
+        csv_data_file= os.path.abspath("../../SKU110K_fixed/annotations/annotations_train.csv"),
+        csv_class_file= os.path.abspath("../../SKU110K_fixed/classes/class_mappings.csv"),
         width=2048,
         height=2048,
         transform=get_transform(train=True)
     )
     dataset_test = CSVGenerator(
-        csv_data_file= os.path.abspath("../../SKU110K/annotations/annotations_train.csv"),
-        csv_class_file= os.path.abspath("../../SKU110K/classes/class_mappings.csv"),
+        csv_data_file= os.path.abspath("../../SKU110K_fixed/annotations/annotations_train.csv"),
+        csv_class_file= os.path.abspath("../../SKU110K_fixed/classes/class_mappings.csv"),
         width=2048,
         height=2048,
         transform=get_transform(train=False)
