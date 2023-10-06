@@ -16,6 +16,25 @@ The dataset is provided for the exclusive use by the recipient and solely for ac
 
 The dataset can be downloaded from <a href="http://trax-geometry.s3.amazonaws.com/cvpr_challenge/SKU110K_fixed.tar.gz"> here</a> or <a href="https://drive.google.com/file/d/1iq93lCdhaPUN0fWbLieMtzfB1850pKwd">here</a>.
 
+```python
+import os
+import keras
+import tarfile
+
+url = "http://trax-geometry.s3.amazonaws.com/cvpr_challenge/SKU110K_fixed.tar.gz"
+filename = os.path.join(os.getcwd(), "data.tar.gz")
+keras.utils.get_file(filename, url)
+
+with tarfile.open("data.tar.gz", "r") as z_fp:
+    z_fp.extractall("../data")
+
+os.makedirs("../data/SKU110_fixed/classes")
+
+url = "https://drive.google.com/file/d/1hZS3oFVFx-W64cMi4A7MrB4Fx124-Mcg/view?usp=sharing"
+filename = os.path.join(os.getcwd(), "class_mappings.csv")
+keras.utils.get_file(filename, url)
+``
+
 ## Usage
 
 Download the dataset and extract to directory data:
