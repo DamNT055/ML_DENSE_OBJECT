@@ -128,4 +128,4 @@ for file in os.listdir(models_dir):
     ):
         model_name = file[: file.find(".py")] if file.endswith(".py") else file
         #module = importlib.import_module("src.mlcvnets.models.classification." + model_name)
-        module = importlib.import_module(f"src.mlcvnets.cvnets.models.classification.{model_name}")
+        module = importlib.import_module(f"cvnets.models.classification.{model_name}")

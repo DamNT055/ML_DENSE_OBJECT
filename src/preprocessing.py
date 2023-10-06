@@ -1,7 +1,7 @@
 import os 
 from tqdm import tqdm
 from six import raise_from
-from .vision_utils.get_image_size import get_image_size
+from vision_utils.get_image_size import get_image_size
 
 def _parse(value, function, fmt):
     try:

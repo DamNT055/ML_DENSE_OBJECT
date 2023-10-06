@@ -1,12 +1,10 @@
 import os
 import torch
-from .model_utils import model_generator
-from .dataloader import dataloader_generator
-from .vision_utils.engine import train_one_epoch, evaluate
+from model_utils import model_generator
+from dataloader import dataloader_generator
+from vision_utils.engine import train_one_epoch, evaluate
 
-def main(
-    num_epochs = 1,
-):
+def main(num_epochs = 1,):
     data_loader, data_loader_test = dataloader_generator()
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     model,_,_ = model_generator()
