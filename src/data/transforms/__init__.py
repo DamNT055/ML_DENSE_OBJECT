@@ -50,4 +50,4 @@ for file in os.listdir(transform_dir):
         transform_name = file[: file.find(".py")] if file.endswith(".py") else file
         
         #module = importlib.import_module("src.mlcvnets.data.transforms" + transform_name)
-        module = importlib.import_module("src.mlcvnets.data.transforms.base_transforms")
+        module = importlib.import_module("data.transforms.base_transforms")

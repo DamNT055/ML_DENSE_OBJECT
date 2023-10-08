@@ -4,9 +4,9 @@ import cv2
 import torch
 import numpy as np
 from six import raise_from
-from .preprocessing import _open_for_csv, _read_classes, _read_images, _read_annotations
-from .transform import get_transform
-from .vision_utils.utils_vision import collate_fn
+from preprocessing import _open_for_csv, _read_classes, _read_images, _read_annotations
+from transform import get_transform
+from vision_utils.utils_vision import collate_fn
 
 class CSVGenerator(torch.utils.data.Dataset):
     def __init__(self, csv_data_file, csv_class_file, width, height, base_dir=None, transform = None, **kwargs):
@@ -93,15 +93,15 @@ class CSVGenerator(torch.utils.data.Dataset):
 
 def dataloader_generator():
     dataset = CSVGenerator(
-        csv_data_file= os.path.abspath("../../SKU110K_fixed/annotations/annotations_train.csv"),
-        csv_class_file= os.path.abspath("../../SKU110K_fixed/classes/class_mappings.csv"),
+        csv_data_file= os.path.abspath("dataraw/SKU110K/annotations/annotations_train.csv"),
+        csv_class_file= os.path.abspath("dataraw/SKU110K/classes/class_mappings.csv"),
         width=2048,
         height=2048,
         transform=get_transform(train=True)
     )
     dataset_test = CSVGenerator(
-        csv_data_file= os.path.abspath("../../SKU110K_fixed/annotations/annotations_train.csv"),
-        csv_class_file= os.path.abspath("../../SKU110K_fixed/classes/class_mappings.csv"),
+        csv_data_file= os.path.abspath("dataraw/SKU110K/annotations/annotations_test.csv"),
+        csv_class_file= os.path.abspath("dataraw/SKU110K/classes/class_mappings.csv"),
         width=2048,
         height=2048,
         transform=get_transform(train=False)

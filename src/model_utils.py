@@ -2,9 +2,9 @@ from torch import nn, Tensor
 from typing import Callable, Dict, List, Optional, Union
 from torchvision.ops.feature_pyramid_network import ExtraFPNBlock, FeaturePyramidNetwork, LastLevelMaxPool
 from torchvision.models._utils import handle_legacy_interface, IntermediateLayerGetter
-from .mlcvnets.options.opts import get_training_arguments
-from .mlcvnets.options.utils import load_config_file
-from .mlcvnets.cvnets.models.classification import arguments_classification, build_classification_model
+from options.opts import get_training_arguments
+from options.utils import load_config_file
+from cvnets.models.classification import arguments_classification, build_classification_model
 from torchvision.ops.feature_pyramid_network import LastLevelP6P7
 from torchvision.models.detection.anchor_utils import AnchorGenerator
 from torchvision.models.detection import RetinaNet
