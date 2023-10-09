@@ -1,19 +1,21 @@
 import math
 import sys
 import time
-# import os 
-# from pathlib import Path 
+# import os
+# from pathlib import Path
 # os.chdir(Path(__file__).parent)
 import torch
 import torchvision.models.detection.mask_rcnn
-from .utils_vision import MetricLogger, SmoothedValue, reduce_dict
-from .coco_eval import CocoEvaluator
-from .coco_utils import get_coco_api_from_dataset
+from vision_utils.utils_vision import MetricLogger, SmoothedValue, reduce_dict
+from vision_utils.coco_eval import CocoEvaluator
+from vision_utils.coco_utils import get_coco_api_from_dataset
+
 
 def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq, scaler=None):
     model.train()
     metric_logger = MetricLogger(delimiter="  ")
-    metric_logger.add_meter("lr", SmoothedValue(window_size=1, fmt="{value:.6f}"))
+    metric_logger.add_meter("lr", SmoothedValue(
+        window_size=1, fmt="{value:.6f}"))
     header = f"Epoch: [{epoch}]"
 
     lr_scheduler = None
@@ -80,7 +82,7 @@ def evaluate(model, data_loader, device):
     torch.set_num_threads(1)
     cpu_device = torch.device("cpu")
     model.eval()
-    metric_logger = utils_vision.MetricLogger(delimiter="  ")
+    metric_logger = MetricLogger(delimiter="  ")
     header = "Test:"
 
     coco = get_coco_api_from_dataset(data_loader.dataset)
@@ -95,14 +97,17 @@ def evaluate(model, data_loader, device):
         model_time = time.time()
         outputs = model(images)
 
-        outputs = [{k: v.to(cpu_device) for k, v in t.items()} for t in outputs]
+        outputs = [{k: v.to(cpu_device) for k, v in t.items()}
+                   for t in outputs]
         model_time = time.time() - model_time
 
-        res = {target["image_id"].item(): output for target, output in zip(targets, outputs)}
+        res = {target["image_id"].item(): output for target,
+               output in zip(targets, outputs)}
         evaluator_time = time.time()
         coco_evaluator.update(res)
         evaluator_time = time.time() - evaluator_time
-        metric_logger.update(model_time=model_time, evaluator_time=evaluator_time)
+        metric_logger.update(model_time=model_time,
+                             evaluator_time=evaluator_time)
 
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()
