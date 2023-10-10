@@ -9,6 +9,8 @@ import torchvision.models.detection.mask_rcnn
 from vision_utils.utils_vision import MetricLogger, SmoothedValue, reduce_dict
 from vision_utils.coco_eval import CocoEvaluator
 from vision_utils.coco_utils import get_coco_api_from_dataset
+from torch.utils.tensorboard import SummaryWriter
+writer = SummaryWriter()
 
 
 def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq, scaler=None):
@@ -59,6 +61,9 @@ def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq, sc
 
         metric_logger.update(loss=losses_reduced, **loss_dict_reduced)
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
+        writer.add_scalar('training loss', losses_reduced,
+                          "epoch {}".format(epoch))
+        writer.add_scalar('learning rate', optimizer.param_groups[0]["lr"])
 
     return metric_logger
 
@@ -118,4 +123,8 @@ def evaluate(model, data_loader, device):
     coco_evaluator.accumulate()
     coco_evaluator.summarize()
     torch.set_num_threads(n_threads)
+
     return coco_evaluator
+
+
+writer.close()
