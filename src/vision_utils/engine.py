@@ -101,6 +101,8 @@ def evaluate(model, data_loader, device):
             torch.cuda.synchronize()
         model_time = time.time()
         outputs = model(images)
+        print("__output__: ")
+        print(outputs)
 
         outputs = [{k: v.to(cpu_device) for k, v in t.items()}
                    for t in outputs]
