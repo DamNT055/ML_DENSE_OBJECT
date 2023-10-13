@@ -7,6 +7,8 @@ from six import raise_from
 from preprocessing import _open_for_csv, _read_classes, _read_images, _read_annotations
 from transform import get_transform
 from vision_utils.utils_vision import collate_fn
+from torch.utils.data.distributed import DistributedSampler
+
 
 class CSVGenerator(torch.utils.data.Dataset):
     def __init__(self, csv_data_file, csv_class_file, width, height, base_dir=None, transform = None, **kwargs):
@@ -109,10 +111,10 @@ def dataloader_generator():
 
     data_loader = torch.utils.data.DataLoader(
         dataset, batch_size=10, shuffle=True, num_workers=0,
-        collate_fn=collate_fn)
+        collate_fn=collate_fn, sampler=DistributedSampler(dataset))
 
     data_loader_test = torch.utils.data.DataLoader(
         dataset_test, batch_size=5, shuffle=False, num_workers=0,
-        collate_fn=collate_fn)
+        collate_fn=collate_fn, sampler=DistributedSampler(dataset_test))
     
     return data_loader, data_loader_test
