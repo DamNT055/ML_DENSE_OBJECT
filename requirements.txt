@@ -5,6 +5,7 @@ scikit-image
 gdown
 transformers
 datasets
+opencv-python
 
 # requirement for Pytorch, Torchvision
 torch>=1.8.0
