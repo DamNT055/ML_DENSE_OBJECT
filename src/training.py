@@ -21,6 +21,7 @@ def clean_up():
     dist.destroy_process_group()
 
 def main(num_epochs = 1,):
+    ddp_setup()
     data_loader, data_loader_test = dataloader_generator()
     #device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     device = int(os.environ["LOCAL_RANK"])
