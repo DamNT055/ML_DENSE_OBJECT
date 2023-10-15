@@ -1,9 +1,12 @@
 import os
 import logging
 import torch
+from datetime import datetime
 from model_utils import model_generator
 from dataloader import dataloader_generator
 from vision_utils.engine import train_one_epoch, evaluate
+from pathlib import Path
+
 
 import torch.multiprocessing as mp 
 from torch.utils.data.distributed import DistributedSampler
@@ -12,6 +15,7 @@ from torch.distributed import init_process_group, destroy_process_group
 import torch.distributed as dist
 
 logger = logging.getLogger(__name__)
+PATH = os.path.join(os.fspath(Path(__file__).resolve().parents[0]), 'out_checkpoints')
 
 def ddp_setup():
     init_process_group(backend='nccl')
@@ -20,7 +24,7 @@ def ddp_setup():
 def clean_up():
     dist.destroy_process_group()
 
-def main(num_epochs = 1,):
+def main(num_epochs = 1):
     ddp_setup()
     data_loader, data_loader_test = dataloader_generator()
     #device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
@@ -35,6 +39,8 @@ def main(num_epochs = 1,):
         train_one_epoch(model=model, optimizer=optimizer, data_loader=data_loader, device=device, epoch=epoch, print_freq=10)
         lr_scheduler.step()
         evaluate(model, data_loader_test, device=device)
+        torch.save(model.state_dict(), os.path.join(PATH, 'cp-epoch_' + str(epoch)+ '_'+ str(datetime.now()).replace(' ', '_') +'.pt'))   
+    destroy_process_group()
 
 if __name__ == "__main__": 
     try: 
