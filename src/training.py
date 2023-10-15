@@ -1,8 +1,12 @@
 import os
 import torch
+from datetime import datetime
+from pathlib import Path
 from model_utils import model_generator
 from dataloader import dataloader_generator
 from vision_utils.engine import train_one_epoch, evaluate
+
+PATH = os.path.join(os.fspath(Path(__file__).resolve().parents[0]), 'out_checkpoints')
 
 def main(num_epochs = 1,):
     data_loader, data_loader_test = dataloader_generator()
@@ -16,6 +20,8 @@ def main(num_epochs = 1,):
         train_one_epoch(model=model, optimizer=optimizer, data_loader=data_loader, device=device, epoch=epoch, print_freq=10)
         lr_scheduler.step()
         evaluate(model, data_loader_test, device=device)
+        torch.save(model.state_dict(), os.path.join(PATH, 'cp-epoch_' + str(epoch)+ '_'+ str(datetime.now()).replace(' ', '_') +'.pt'))   
+
 
 if __name__ == "__main__": 
     main()
