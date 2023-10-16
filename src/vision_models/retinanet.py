@@ -723,7 +723,7 @@ class RetinaNet_ResNet50_FPN_V2_Weights(WeightsEnum):
     weights=("pretrained", RetinaNet_ResNet50_FPN_Weights.COCO_V1),
     weights_backbone=("pretrained_backbone", ResNet50_Weights.IMAGENET1K_V1),
 )
-def retinanet_resnet50_fpn(
+def retinanet_resnet50_fpn_td(
     *,
     weights: Optional[RetinaNet_ResNet50_FPN_Weights] = None,
     progress: bool = True,
@@ -826,7 +826,7 @@ def retinanet_resnet50_fpn(
     weights=("pretrained", RetinaNet_ResNet50_FPN_V2_Weights.COCO_V1),
     weights_backbone=("pretrained_backbone", ResNet50_Weights.IMAGENET1K_V1),
 )
-def retinanet_resnet50_fpn_v2(
+def retinanet_resnet50_fpn_v2_td(
     *,
     weights: Optional[RetinaNet_ResNet50_FPN_V2_Weights] = None,
     progress: bool = True,
