@@ -7,8 +7,8 @@ from options.utils import load_config_file
 from cvnets.models.classification import arguments_classification, build_classification_model
 from torchvision.ops.feature_pyramid_network import LastLevelP6P7
 from torchvision.models.detection.anchor_utils import AnchorGenerator
-from torchvision.models.detection import RetinaNet
-
+#from torchvision.models.detection import RetinaNet
+from vision_models.retinanet import RetinaNet
 
 class BackboneWithFPN(nn.Module):
     def __init__(
