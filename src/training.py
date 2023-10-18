@@ -6,6 +6,9 @@ from model_utils import model_generator
 from dataloader import dataloader_generator
 from vision_utils.engine import train_one_epoch, evaluate
 
+import wandb
+wandb.login()
+
 PATH = os.path.join(os.fspath(Path(__file__).resolve().parents[0]), 'out_checkpoints')
 
 def main(num_epochs = 1,):
