@@ -13,7 +13,6 @@ from vision_utils.coco_utils import get_coco_api_from_dataset
 #writer = SummaryWriter()
 import wandb
 
-
 def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq, scaler=None):
     model.train()
     metric_logger = MetricLogger(delimiter="  ")
