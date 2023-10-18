@@ -145,3 +145,5 @@ def evaluate(model, data_loader, device, loss_only=False):
 
 
 #writer.close()
+wandb.finish()
+

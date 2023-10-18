@@ -1,14 +1,3 @@
-import wandb
-wandb.init(
-    project="ml_dense_object",
-    config={
-        "learning_rate": 0.0001,
-        "architecture": "retinanet_mobilevit",
-        "dataset": "SKU110K",
-        "epochs": 10
-        }
-)
-
 import os
 import torch
 from datetime import datetime
@@ -33,7 +22,6 @@ def main(num_epochs = 1,):
         evaluate(model, data_loader_test, device=device, loss_only=True)
         torch.save(model.state_dict(), os.path.join(PATH, 'cp-epoch_' + str(epoch)+ '_'+ str(datetime.now()).replace(' ', '_') +'.pt'))   
 
-wandb.finish()
 
 if __name__ == "__main__": 
     main()
