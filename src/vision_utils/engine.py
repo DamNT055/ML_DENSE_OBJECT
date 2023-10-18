@@ -12,6 +12,15 @@ from vision_utils.coco_utils import get_coco_api_from_dataset
 #from torch.utils.tensorboard import SummaryWriter
 #writer = SummaryWriter()
 import wandb
+wandb.init(
+    project="ml_dense_object",
+    config={
+        "learning_rate": 0.0001,
+        "architecture": "retinanet_mobilevit",
+        "dataset": "SKU110K",
+        "epochs": 10
+        }
+)
 
 def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq, scaler=None):
     model.train()
