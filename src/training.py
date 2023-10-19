@@ -38,7 +38,7 @@ def main(num_epochs = 1):
     for epoch in range(num_epochs):
         train_one_epoch(model=model, optimizer=optimizer, data_loader=data_loader, device=device, epoch=epoch, print_freq=10)
         lr_scheduler.step()
-        evaluate(model, data_loader_test, device=device)
+        evaluate(model, data_loader_test, device=device, loss_only=True)
         torch.save(model.state_dict(), os.path.join(PATH, 'cp-epoch_' + str(epoch)+ '_'+ str(datetime.now()).replace(' ', '_') +'.pt'))   
     destroy_process_group()
 
