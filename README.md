@@ -10,8 +10,8 @@ pip install -r requirements.txt
 ```
 mkdir -p src/dataraw
 cd src/dataraw
-gdown --id 1baFn5FBNqNH3itjduq0msZ7TYn-yBXyz
-unzip sku.zip
+gdown --id 1mTmlQ7qutDBuxz_JDH2hZ7y8JVRnSl1
+unzip SKU_1.zip
 cd ..
 !gdown --id 1XvDCuTBCHrtqoFBm-vt2NcAB9eU9o3nX
 unzip results.zip
