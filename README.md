@@ -11,7 +11,7 @@ pip install -r requirements.txt
 mkdir -p src/dataraw
 cd src/dataraw
 gdown --id 1mTmlQ7qutDBuxz_JDH2hZ7y8JVRnSl1
-unzip SKU_1.zip
+unrar x SKU_1.rar
 cd ..
 !gdown --id 1XvDCuTBCHrtqoFBm-vt2NcAB9eU9o3nX
 unzip results.zip
