@@ -11,6 +11,17 @@ from vision_utils.coco_eval import CocoEvaluator
 from vision_utils.coco_utils import get_coco_api_from_dataset
 #from torch.utils.tensorboard import SummaryWriter
 #writer = SummaryWriter()
+import wandb
+wandb.init(
+    project="ml_dense_object",
+    config={
+        "learning_rate": 0.0001,
+        "architecture": "retinanet_mobilevit",
+        "dataset": "SKU110K",
+        "epochs": 10
+        }
+)
+
 
 
 def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq, scaler=None):
@@ -63,7 +74,11 @@ def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq, sc
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
         #writer.add_scalar('training loss', losses_reduced, "epoch {}".format(epoch))
         #writer.add_scalar('learning rate', optimizer.param_groups[0]["lr"])
-
+        wandb.log({
+            'training_loss': losses_reduced,
+            'learning_rate': optimizer.param_groups[0]["lr"],
+            'epoch': epoch
+        })
     return metric_logger
 
 
@@ -99,13 +114,16 @@ def evaluate(model, data_loader, device):
         if torch.cuda.is_available():
             torch.cuda.synchronize()
         model_time = time.time()
-        outputs = model(images)
-        print("__output__: ")
-        print(outputs)
+        outputs = model(images, loss_only=loss_only)
+        wandb.log({
+            'evaluate_loss': outputs.items()
+        })
 
         outputs = [{k: v.to(cpu_device) for k, v in t.items()}
                    for t in outputs]
         model_time = time.time() - model_time
+        wandb.log({ 'model_time' : model_time})
+
 
         res = {target["image_id"].item(): output for target,
                output in zip(targets, outputs)}
@@ -129,3 +147,4 @@ def evaluate(model, data_loader, device):
 
 
 #writer.close()
+wandb.finish()
