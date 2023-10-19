@@ -16,6 +16,7 @@ import torch.distributed as dist
 
 logger = logging.getLogger(__name__)
 PATH = os.path.join(os.fspath(Path(__file__).resolve().parents[0]), 'out_checkpoints')
+if (not os.path.isdir(PATH)): os.makedirs(PATH)
 
 def ddp_setup():
     init_process_group(backend='nccl')
