@@ -1,9 +1,9 @@
 import math
 import sys
 import time
-# import os
-# from pathlib import Path
-# os.chdir(Path(__file__).parent)
+import os
+from pathlib import Path
+sys.path.insert(0, os.fspath(Path(__file__).parents[1]))
 import torch
 import torchvision.models.detection.mask_rcnn
 from vision_utils.utils_vision import MetricLogger, SmoothedValue, reduce_dict
@@ -12,6 +12,7 @@ from vision_utils.coco_utils import get_coco_api_from_dataset
 #from torch.utils.tensorboard import SummaryWriter
 #writer = SummaryWriter()
 import wandb
+wandb.login()
 wandb.init(
     project="ml_dense_object",
     config={
