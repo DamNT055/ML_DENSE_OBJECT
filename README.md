@@ -1,4 +1,4 @@
-# ML_DENSE_OBJECT
+# PYTORCH DENSE OBJECT DETECTION
 
 ## Note 
 Please note that the main part of the code has been released, though we are still testing it to fix possible glitches. Thank you.
